@@ -3,12 +3,15 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.util.List;
+import java.util.Map;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
         // fazer uma conexão HTTP e buscar o TOP 250 filmes
-        String url = "https://imdb-api.com/en/API/Top250Movies/k_cvr5teic";
+        // String url = "https://imdb-api.com/en/API/Top250Movies/k_cvr5teic";
+        String url = "https://mocki.io/v1/9a7c1ca9-29b4-4eb3-8306-1adb9d159060";
         URI endereco = URI.create(url);
         var client = HttpClient.newHttpClient();
         var request = HttpRequest.newBuilder(endereco).GET().build();
@@ -17,7 +20,9 @@ public class App {
         System.out.println(body);
 
         // extrair só os dados que interessam (titulo, poster, classificação ) <<< isso significa parsear os dados
-
+        var parser = new JsonParser();
+        List<Map<String, String>> listaDeFilmes = parser.parse(body);
+        
         // manipular e exibir os dados
 
     }
